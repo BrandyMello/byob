@@ -1,0 +1,41 @@
+dependencies,,,
+id,name,population,countryId
+1,Taiwan,"23,773,876",1
+2,Hong Kong,"7,436,154",1
+3,Puerto Rico,"2,933,408",3
+4,Réunion,"888,927",22
+5,Macao,"640,445",1
+6,Western Sahara,"582,463",null
+7,Guadeloupe,"400,056",22
+8,Martinique,"375,554",22
+9,French Guiana,"290,832",22
+10,New Caledonia,"282,750",22
+11,French Polynesia,"279,287",22
+12,Mayotte,"266,150",22
+13,Channel Islands,"172,259",21
+14,Guam,"167,294",3
+15,Curaçao,"163,424",67
+16,Aruba,"106,314",67
+17,U.S. Virgin Islands,"104,578",3
+18,Isle of Man,"84,584",21
+19,Cayman Islands,"64,948",21
+20,Bermuda,"62,506",21
+21,Northern Mariana Islands,"57,216",3
+22,Greenland,"56,672",113
+23,American Samoa,"55,312",3
+24,Faeroe Islands,"48,678",113
+25,Sint Maarten,"42,388",67
+26,Turks and Caicos,"38,191",21
+27,Gibraltar,"33,701",21
+28,British Virgin Islands,"30,030",21
+29,Caribbean Netherlands,"25,979",67
+30,Cook Islands,"17,548",123
+31,Anguilla,"14,869",21
+32,Wallis & Futuna,"11,432",22
+33,Saint Barthelemy,"9,847",22
+34,Saint Helena,"6,059",21
+35,Saint Pierre & Miquelon,"5,822",22
+36,Montserrat,"4,989",21
+37,Falkland Islands,"3,377",21
+38,Niue,"1,615",123
+39,Tokelau,"1,340",123
