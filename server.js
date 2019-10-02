@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const csv = require('csv-parser');
+const fs =require('fs');
+const results = [];
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'BYOB';
@@ -12,4 +15,16 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 });
 
-// 'https://date.nager.at/Api/v2/AvailableCountries'
+fs.createReadStream('countries_data.csv')
+.pipe(csv())
+.on('data', (data) => results.push(data))
+.on('end', () => {
+  console.log(results)
+});
+
+fs.createReadStream('dependencies_or_territories_data.csv')
+  .pipe(csv())
+  .on('data', (data) => results.push(data))
+  .on('end', () => {
+    console.log(results)
+  });
