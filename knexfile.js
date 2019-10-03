@@ -5,10 +5,10 @@ module.exports = {
   development: {
     client: 'pg',
     connection: 'postgres://localhost/byob',
-    useNullAsDefault: true
-    // migrations: {
-    //   directory: '.'
-    // }
+    useNullAsDefault: true,
+    migrations: {
+      directory: './db/migrations'
+    }
   }
 
 };
