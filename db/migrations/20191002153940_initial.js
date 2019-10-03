@@ -13,12 +13,16 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.string('name');
       table.string('population');
-      table.string()
+      table.integer('countryId').unsigned();
+      table.foreign('countryId').references('countries.id');
+      table.timestamps(true, true);
     })
-
   ])  
 };
 
 exports.down = function(knex) {
-  
+  return Promise.all([
+    knex.schema.dropTable('countries'),
+    knex.schema.dropTable('dependencies_or_territories')
+  ]);
 };
