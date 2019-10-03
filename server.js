@@ -20,7 +20,7 @@ fs.createReadStream('countries_data.csv')
 .pipe(csv())
 .on('data', (data) => countryResults.push(data))
 .on('end', () => {
-  console.log(countryResults)
+  // console.log(countryResults)
 });
 
 fs.createReadStream('dependencies_or_territories_data.csv')

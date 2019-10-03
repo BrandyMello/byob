@@ -1,5 +1,7 @@
+import countryResults from '../../../server';
 
 exports.seed = function(knex) {
+  console.log('in countries', countryResults)
   // Deletes ALL existing entries
   return knex('table_name').del()
     .then(function () {
