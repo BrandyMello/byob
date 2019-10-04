@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const csv = require('csv-parser');
 const fs =require('fs');
+const environment = process.env.NODE_ENV || 'development';
 const countryResults = [];
 const depAndTerResults = [];
 
@@ -27,5 +28,5 @@ fs.createReadStream('dependencies_or_territories_data.csv')
   .pipe(csv())
   .on('data', (data) => depAndTerResults.push(data))
   .on('end', () => {
-    console.log(depAndTerResults)
+    // console.log(depAndTerResults)
   });
