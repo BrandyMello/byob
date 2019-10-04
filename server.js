@@ -3,12 +3,8 @@ const app = express();
 const csv = require('csv-parser');
 const fs =require('fs');
 const environment = process.env.NODE_ENV || 'development';
-<<<<<<< HEAD
-const results = [];
-=======
 const countryResults = [];
 const depAndTerResults = [];
->>>>>>> seeds
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'BYOB';
