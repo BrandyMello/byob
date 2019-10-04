@@ -18,7 +18,7 @@ const createCountry = (knex, country) => {
 const createTerritory = (knex, territory) => {
   return knex('countries').where('name', territory.territoryOf).first()
     .then((country) => {
-      console.log(country.id)
+      console.log(country)
       return knex('dependencies_or_territories').insert({
         name: territory.name,
         territory_population: parseInt(territory.territoryPopulation.trim()),
