@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const csv = require('csv-parser');
 const fs =require('fs');
+const environment = process.env.NODE_ENV || 'development';
 const results = [];
 
 app.set('port', process.env.PORT || 3000);
