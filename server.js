@@ -3,7 +3,12 @@ const app = express();
 const csv = require('csv-parser');
 const fs =require('fs');
 const environment = process.env.NODE_ENV || 'development';
+<<<<<<< HEAD
 const results = [];
+=======
+const countryResults = [];
+const depAndTerResults = [];
+>>>>>>> seeds
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'BYOB';
@@ -18,14 +23,14 @@ app.listen(app.get('port'), () => {
 
 fs.createReadStream('countries_data.csv')
 .pipe(csv())
-.on('data', (data) => results.push(data))
+.on('data', (data) => countryResults.push(data))
 .on('end', () => {
-  console.log(results)
+  // console.log(countryResults)
 });
 
 fs.createReadStream('dependencies_or_territories_data.csv')
   .pipe(csv())
-  .on('data', (data) => results.push(data))
+  .on('data', (data) => depAndTerResults.push(data))
   .on('end', () => {
-    console.log(results)
+    // console.log(depAndTerResults)
   });
