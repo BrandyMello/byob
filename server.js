@@ -46,7 +46,7 @@ app.get('/api/v1/countries/:id', (request, response) => {
 });
 
 app.get('/api/v1/territories', (request, response) => {
-  database('territories').select()
+  database('dependencies_or_territories').select()
     .then((territories) => {
       response.status(200).json(territories);
     })
