@@ -55,20 +55,20 @@ app.get('/api/v1/territories', (request, response) => {
     });
 });
 
-app.get('/api/v1/territories/:id', (request, response) => {
-  console.log(request.params.id)
-  database('territories').where('id', request.params.id).select()
-    .then((territories) => {
-      if (territories.length) {
-        response.status(200).json(territories);
-      } else {
-        response.status(404).json({
-          error: `The territory with id ${request.params.id} not found`
-        });
-      }
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
-});
+// app.get('/api/v1/territories/:id', (request, response) => {
+//   console.log(request.params.id)
+//   database('territories').where('id', request.params.id).select()
+//     .then((territories) => {
+//       if (territories.length) {
+//         response.status(200).json(territories);
+//       } else {
+//         response.status(404).json({
+//           error: `The territory with id ${request.params.id} not found`
+//         });
+//       }
+//     })
+//     .catch((error) => {
+//       response.status(500).json({ error });
+//     });
+// });
 
