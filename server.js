@@ -3,6 +3,9 @@ const app = express();
 const csv = require('csv-parser');
 const fs =require('fs');
 const environment = process.env.NODE_ENV || 'development';
+const configuration = require('./knexfile')[environment];
+const database = require('knex')(configuration);
+
 const countryResults = [];
 const depAndTerResults = [];
 
