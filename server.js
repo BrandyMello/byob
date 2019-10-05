@@ -6,10 +6,8 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
-const countryResults = [];
-const depAndTerResults = [];
-
 app.set('port', process.env.PORT || 3000);
+app.use(express.json());
 app.locals.title = 'BYOB';
 
 app.get('/', (request, response) => {
@@ -20,16 +18,12 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 });
 
-fs.createReadStream('countries_data.csv')
-.pipe(csv())
-.on('data', (data) => countryResults.push(data))
-.on('end', () => {
-  // console.log(countryResults)
-});
-
-fs.createReadStream('dependencies_or_territories_data.csv')
-  .pipe(csv())
-  .on('data', (data) => depAndTerResults.push(data))
-  .on('end', () => {
-    // console.log(depAndTerResults)
+app.get('/api/v1/countries', (request, response) => {
+  database('countries').select()
+  .then((countries) => {
+    response.status(200).json(countries);
+  })
+  .catch((error) => {
+    response.status(500).json({ error });
   });
+});
