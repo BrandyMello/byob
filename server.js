@@ -29,7 +29,8 @@ app.get('/api/v1/countries', (request, response) => {
 });
 
 app.get('/api/v1/countries/:id', (request, response) => {
-  database('countries').where('id', request.params.id).select()
+  console.log(request.params.id)
+  database('countries').where('id', parseInt(request.params.id)).select()
     .then((countries) => {
       if(countries.length) {
         response.status(200).json(countries);
