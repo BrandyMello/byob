@@ -27,3 +27,19 @@ app.get('/api/v1/countries', (request, response) => {
     response.status(500).json({ error });
   });
 });
+
+app.get('/api/v1/countries/:id', (request, response) => {
+  database('countries').where('id', request.params.id).select()
+    .then((countries) => {
+      if(countries.length) {
+        response.status(200).json(countries);
+      } else {
+        response.status(404).json({
+          error: `Country with id ${request.params.id} not found`
+        });
+      }
+    })  
+    .catch((error) => {
+      response.status(500).json({ error });
+    });
+});
