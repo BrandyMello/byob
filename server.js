@@ -45,10 +45,10 @@ app.get('/api/v1/countries/:id', (request, response) => {
     });
 });
 
-app.get('/api/v1/dependencies_or_territories', (request, response) => {
+app.get('/api/v1/territories', (request, response) => {
   database('dependencies_or_territories').select()
-    .then((terr) => {
-      response.status(200).json(terr);
+    .then((territories) => {
+      response.status(200).json(territories);
     })
     .catch((error) => {
       response.status(500).json({ error });
