@@ -56,7 +56,6 @@ app.get('/api/v1/territories', (request, response) => {
 });
 
 app.get('/api/v1/territories/:id', (request, response) => {
-  console.log(request.params.id)
   database('dependencies_or_territories').where('id', request.params.id).select()
     .then((territory) => {
       if (territory.length) {
