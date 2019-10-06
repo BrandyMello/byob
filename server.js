@@ -99,17 +99,16 @@ app.post('/api/v1/countries', (request, response) => {
 app.post('/api/v1/territories', async (request, response) => {
   const territory = request.body;
   const country = await database('countries').where('name', territory.territoryOf).first();
-  const countryTerritory = {...territory, countryId: country.id};
+  const countryTerritory = {...territory, countryId: country.id, population: null};
 
-  for (let requiredParameter of ['name', 'territoryPopulation', 'territoryOf']) {
+  for (let requiredParameter of ['name', 'territory_population']) {
     if (!territory[requiredParameter]) {
       return response
         .status(422)
         .send({
           error: `Expected format: {
         name: <String>,
-        territoryPopulation: <Integer>,
-        territoryOf: <String>
+        territory_population: <Integer>
       }. You are missing a "{requiredParameter}" property.`})
     }
   }
