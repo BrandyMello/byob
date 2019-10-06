@@ -95,3 +95,30 @@ app.post('/api/v1/countries', (request, response) => {
     })
   });
 })
+
+app.post('/api/v1/dependencies_or_territories', (request, response) => {
+  const territory = request.body;
+  const country = database('countries').where('name', territory.territoryOf).first();
+  const countryTerritory = {...territory, countryId: country.id};
+
+  for (let requiredParameter of ['name', 'territory_population', 'territoryOf']) {
+    if (!territory[requiredParameter]) {
+      return response
+        .status(422)
+        .send({
+          error: `Expected format: {
+        name: <String>,
+        territory_population: <Integer>,
+        territoryOf: <String>
+      }. You are missing a "{requiredParameter}" property.`})
+    }
+  }
+
+  database('dependencies_or_territories').insert(countryTerritory, 'id')
+    .then(territory => {
+      response.status(201).json({ id: territory[0] })
+        .catch(error => {
+          response.status(500).json({ error });
+        })
+    });
+})
