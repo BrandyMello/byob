@@ -72,3 +72,26 @@ app.get('/api/v1/territories/:id', (request, response) => {
     });
 });
 
+app.post('/api/v1/countries', (request, response) => {
+  const country = request.body;
+  
+  for (let requiredParameter of ['name', 'country_population','country_land_area']) {
+    if (!country[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: {
+        name: <String>,
+        country_population: <Integer>,
+        country_land_area: <Integer>
+      }. You are missing a "{requiredParameter}" property.`})
+    }    
+  }
+
+  database('countries').insert(country, 'id')
+    .then(country => {
+    response.status(201).json({ id: country[0]})
+    .catch(error => {
+      response.status(500).json({ error });
+    })
+  });
+})
