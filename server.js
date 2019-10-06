@@ -125,6 +125,6 @@ app.post('/api/v1/territories', async (request, response) => {
 
 app.delete('/api/v1/countries/:id', (request, response) => {
   database('countries').where('id', request.params.id).del()
-    .then(response => response.status(201).json(`Country with the ID ${request.params.id} has been deleted.`))
+    .then(response => response.status(201).send(`Country with the ID ${request.params.id} has been deleted.`))
     .catch(error => response.status(500).json({error}))
 })
