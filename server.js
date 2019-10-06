@@ -1,7 +1,7 @@
 const express = require('express');
+//requiring express
 const app = express();
-const csv = require('csv-parser');
-const fs = require('fs');
+//assigning the app to the invocation of express
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
