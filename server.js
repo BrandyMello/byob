@@ -99,7 +99,7 @@ app.post('/api/v1/countries', (request, response) => {
 app.post('/api/v1/territories', async (request, response) => {
   const territory = request.body;
   const country = await database('countries').where('name', territory.territoryOf).first();
-  const countryTerritory = {...territory, countryId: country.id};
+  const countryTerritory = await {...territory, countryId: country.id};
 
   for (let requiredParameter of ['name', 'territory_population', 'territoryOf']) {
     if (!territory[requiredParameter]) {
@@ -132,5 +132,17 @@ app.delete('/api/v1/countries/:id', (request, response) => {
         response.status(404).send(`Country with the ID ${request.param.id} not found.`)
       }
     })
-        .catch(error => response.status(500).json({error}))
-})
+    .catch(error => response.status(500).json({error}))
+});
+
+app.delete('/api/v1/territories/:name', (request, response) => {
+  database('dependencies_or_territories').where('name', request.params.name).del()
+    .then(territory => {
+      if(territory) {
+        response.status(201).send(`Territory ${request.params.name} has been deleted.`)
+      } else {
+        response.status(404).send(`Territory ${request.params.name} not found.`)
+      }
+    })
+    .catch(error => response.status(500).json({ error }))
+});
