@@ -2,17 +2,17 @@
 Overview: This project was built in order to practice building a restful API, viewing it in Postgres, and accessing data on a local server and from the API deployed to Heroku.
 
 ### Table of Contents
-1. Schema
-1. Setup
-1. API Endpoints <br>
-  * GET
-  * POST
-  * DELETE
+1. [Schema](#schema)
+1. [Setup](#setup)
+1. [API Endpoints](#endpoints)
+  * [GET](#get)
+  * [POST](#post)
+  * [DELETE](#delete)
 
-#### Schema
+#### <a name="schema">Schema</a>
 <img width="650" alt="Screen Shot 2019-10-01 at 9 19 51 PM" src="https://user-images.githubusercontent.com/46384968/66015818-4e815380-e491-11e9-8396-ce89aad533ab.png">
 
-### Setup
+### <a name="setup">Setup</a>
 #### Requirements: PostgreSQL, Node.js, and Express
 <ul> 
   <li>
@@ -40,8 +40,8 @@ Overview: This project was built in order to practice building a restful API, vi
  ```node server.js```
  and open ```http://localhost:3000/```
  
- ### API Endpoints
- #### GET Requests
+ ### <a name="endpoints">API Endpoints</a>
+ #### <a name="get">GET Requests</a>
  To GET all Countries:
  ```GET /api/v1/countries```<br>
  Return:
@@ -136,7 +136,7 @@ population: null
 }
 ]
 ```
-#### POST Requests
+#### <a name="post">POST Requests</a>
 To POST a country:<br>
 ```POST /api/v1/countries```<br>
 Request Body:<br>
@@ -167,7 +167,7 @@ Returns: <br>
 ```
 NOT CURRENTLY FUNCTIONING
 ```
-#### DELETE Requests
+#### <a name="delete">DELETE Requests</a>
 To DELETE a country: <br>
 ```
 DELETE /api/v1/countries/:id
