@@ -99,7 +99,7 @@ app.post('/api/v1/countries', (request, response) => {
 app.post('/api/v1/territories', async (request, response) => {
   const territory = request.body;
   const country = await database('countries').where('name', territory.territoryOf).first();
-  const countryTerritory = {...territory, territory_population: territory.territoryPopulation, countryId: country.id};
+  const countryTerritory = {...territory, countryId: country.id};
 
   for (let requiredParameter of ['name', 'territoryPopulation', 'territoryOf']) {
     if (!territory[requiredParameter]) {
