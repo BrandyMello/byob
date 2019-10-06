@@ -146,19 +146,3 @@ app.delete('/api/v1/territories/:name', (request, response) => {
     })
     .catch(error => response.status(500).json({ error }))
 });
-
-app.get('/api/v1/territories/:name', (request, response) => {
-  database('dependencies_or_territories').where('name', request.params.name).select()
-    .then((territory) => {
-      if (territory.length) {
-        response.status(200).json(territory);
-      } else {
-        response.status(404).json({
-          error: `The territory with the name ${request.params.name} not found`
-        });
-      }
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
-})
