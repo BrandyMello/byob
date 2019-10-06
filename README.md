@@ -1,7 +1,15 @@
 ## BYOB - Build Your Own Backend
 Overview: This project was built in order to practice building a restful API, viewing it in Postgres, and accessing data on a local server and from the API deployed to Heroku.
 
-### Schema
+### Table of Contents
+1. Schema
+1. Setup
+1. API Endpoints <br>
+  * GET
+  * POST
+  * DELETE
+
+#### Schema
 <img width="650" alt="Screen Shot 2019-10-01 at 9 19 51 PM" src="https://user-images.githubusercontent.com/46384968/66015818-4e815380-e491-11e9-8396-ce89aad533ab.png">
 
 ### Setup
@@ -33,7 +41,7 @@ Overview: This project was built in order to practice building a restful API, vi
  and open ```http://localhost:3000/```
  
  ### API Endpoints
- ### GET Requests
+ #### GET Requests
  To GET all Countries:
  ```GET /api/v1/countries```<br>
  Return:
@@ -128,4 +136,49 @@ population: null
 }
 ]
 ```
+#### POST Requests
+To POST a country:<br>
+```POST /api/v1/countries```<br>
+Request Body:<br>
+```
+{
+	"name": "TestLand",
+	"country_population": 4500,
+	"country_land_area": 550000
+}
+```
+Returns: <br>
+```
+{
+    "id": 2347
+}
+```
+To POST a territory:<br>
+```POST /api/v1/territories```<br>
+Request Body:<br>
+```
+{
+	"name": "TestTerritory",
+	"territory_population": 4500,
+	"territoryOf": "TestLand"
+}
+```
+Returns: <br>
+```
+NOT CURRENTLY FUNCTIONING
+```
+#### DELETE Requests
+To DELETE a country: <br>
+```
+DELETE /api/v1/countries/:id
+```
+Returns: <br>
+```
+{
+    "error": {}
+}
+```
+* When attempt to GET again, it has been deleted.
+
+
 
