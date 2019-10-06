@@ -117,7 +117,7 @@ app.post('/api/v1/territories', (request, response) => {
 
   database('dependencies_or_territories').insert(countryTerritory, 'id')
     .then(territory => {
-      response.status(201).json({ id: countryTerritory[0] })
+      response.status(201).json({ id: territory[0] })
     .catch(error => {
       response.status(500).json({ error });
     })
