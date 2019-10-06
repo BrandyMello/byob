@@ -96,10 +96,10 @@ app.post('/api/v1/countries', (request, response) => {
   });
 })
 
-app.post('/api/v1/territories', async (request, response) => {
+app.post('/api/v1/territories', (request, response) => {
   const territory = request.body;
-  const country = await database('countries').where('name', territory.territoryOf).first();
-  const countryTerritory = await {...territory, countryId: country.id};
+  const country = database('countries').where('name', territory.territoryOf).first();
+  const countryTerritory = {...territory, countryId: country.id};
 
   for (let requiredParameter of ['name', 'territory_population', 'territoryOf']) {
     if (!territory[requiredParameter]) {
