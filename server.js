@@ -96,9 +96,9 @@ app.post('/api/v1/countries', (request, response) => {
   });
 })
 
-app.post('/api/v1/dependencies_or_territories', (request, response) => {
+app.post('/api/v1/territories', async (request, response) => {
   const territory = request.body;
-  const country = database('countries').where('name', territory.territoryOf).first();
+  const country = await database('countries').where('name', territory.territoryOf).first();
   const countryTerritory = {...territory, countryId: country.id};
 
   for (let requiredParameter of ['name', 'territory_population', 'territoryOf']) {
