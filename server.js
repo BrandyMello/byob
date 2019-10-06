@@ -109,8 +109,7 @@ app.post('/api/v1/territories', async (request, response) => {
           error: `Expected format: {
         name: <String>,
         territory_population: <Integer>,
-        territoryOf: <String>,
-        population: null
+        territoryOf: <String>
       }. You are missing a "{requiredParameter}" property.`})
     }
   }
