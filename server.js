@@ -58,9 +58,9 @@ app.get('/api/v1/territories', (request, response) => {
 app.get('/api/v1/territories/:id', (request, response) => {
   console.log(request.params.id)
   database('dependencies_or_territories').where('id', request.params.id).select()
-    .then((territories) => {
-      if (territories.length) {
-        response.status(200).json(territories);
+    .then((territory) => {
+      if (territory.length) {
+        response.status(200).json(territory);
       } else {
         response.status(404).json({
           error: `The territory with id ${request.params.id} not found`
@@ -117,10 +117,10 @@ app.post('/api/v1/territories', async (request, response) => {
   database('dependencies_or_territories').insert(countryTerritory, 'id')
     .then(territory => {
       response.status(201).json({ id: territory[0] })
-        .catch(error => {
-          response.status(500).json({ error });
-        })
-    });
+    .catch(error => {
+      response.status(500).json({ error });
+    })
+  });
 })
 
 app.delete('/api/v1/countries/:id', (request, response) => {
@@ -146,3 +146,8 @@ app.delete('/api/v1/territories/:name', (request, response) => {
     })
     .catch(error => response.status(500).json({ error }))
 });
+
+app.get('/api/v1/territories/:name', (request, response) => {
+  database('dependencies_or_territories').where('name', request.params.name).select()
+    .then()
+})
