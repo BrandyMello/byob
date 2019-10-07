@@ -180,18 +180,18 @@ app.post('/api/v1/territories', async (request, response) => {
 
 app.delete('/api/v1/countries/:id', (request, response) => {
   //this is a delete endpoint, we need the dynamic id to know which country we are deleting
-  database('countries').where('id', request.params.id).del()
+  database('countries').where('id', parseInt(request.params.id)).del()
   //here we are looking through the countries data set and finding the id that matches the id that is passed through the request and then deleting it
     .then(country => {
       //here we are taking the response and if it is truthy
       if(country) {
-        response.status(201).send(`Country with the ID ${request.params.id} has been deleted.`)//we are returning a 201 status (good but change made)and sending a message that it was deleted
+        response.status(201).send(`Country with the ID ${request.params.id} has been deleted.`)//we are returning a 201 status (good and change made)and sending a message that it was deleted
       } else {
         response.status(404).send(`Country with the ID ${request.param.id} not found.`)//if the response is no good because the request was bad, we are sending this message
       }
     })
     .catch(error => response.status(500).json({error}))
-    //here we are catching any server errors and returning a 500 and an error object; I am getting this response eventhough the country is actually being deleted.
+    //here we are catching any server errors and returning a 500 and an error object
 });
 
 app.delete('/api/v1/territories/:id', (request, response) => {
