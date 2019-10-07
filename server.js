@@ -143,12 +143,17 @@ app.post('/api/v1/countries', (request, response) => {
 })
 
 app.post('/api/v1/territories', async (request, response) => {
+  //here we are adding another endpoint, because we are getting information from the other table, and it is an asynchronous we need to async this action
   const territory = request.body;
-  const country = await database('countries').where('name', territory.territoryOf).first();
+  //we are assigning the request body object to a variable
+  const country = await database('countries').where('name', territory.territoryOf).first();//here is where we are awaiting the return of the country with the name equal to the territories value assigned to the key territoryOf and assigning it to the country variable
   const countryTerritory = {...territory, countryId: country.id};
+  //here we are taking that territory (request body) object and adding the countryId that correlates to the id from the country that we have awaited. I wondered if I needed to await this also and this POST is not working. It returnsthe 422 below; see issue for details, although it may have to do with naming conventions caused by my migrations that I failed
 
   for (let requiredParameter of ['name', 'territory_population', 'territoryOf']) {
+    //here we are setting the parameters that we require for the request body in the POST
     if (!territory[requiredParameter]) {
+      //if the request body is missing a required parameter
       return response
         .status(422)
         .send({
@@ -157,31 +162,40 @@ app.post('/api/v1/territories', async (request, response) => {
         territory_population: <Integer>,
         territoryOf: <String>
       }. You are missing a "{requiredParameter}" property.`})
-    }
+    }//we must return a 422 status code and an error message reminding of the required parameters
   }
 
   database('dependencies_or_territories').insert(countryTerritory, 'id')
+  //here we are accessing the table dependencies_or_territories and adding the territory above to that data set
     .then(territory => {
+      //if we requested the right information and got a good response
       response.status(201).json({ id: territory[0] })
+      //we receive a 201 status code because it is a good response but has altered the database
     .catch(error => {
+      //this is a catch error returning a 500 code status 
       response.status(500).json({ error });
-    })
+    })//and an error object if the server response is bad
   });
 })
 
 app.delete('/api/v1/countries/:id', (request, response) => {
+  //this is a delete endpoint, we need the dynamic id to know which country we are deleting
   database('countries').where('id', request.params.id).del()
+  //here we are looking through the countries data set and finding the id that matches the id that is passed through the request and then deleting it
     .then(country => {
+      //here we are taking the response and if it is truthy
       if(country) {
-        response.status(201).send(`Country with the ID ${request.params.id} has been deleted.`)
+        response.status(201).send(`Country with the ID ${request.params.id} has been deleted.`)//we are returning a 201 status (good but change made)and sending a message that it was deleted
       } else {
-        response.status(404).send(`Country with the ID ${request.param.id} not found.`)
+        response.status(404).send(`Country with the ID ${request.param.id} not found.`)//if the response is no good because the request was bad, we are sending this message
       }
     })
     .catch(error => response.status(500).json({error}))
+    //here we are catching any server errors and returning a 500 and an error object; I am getting this response eventhough the country is actually being deleted.
 });
 
 app.delete('/api/v1/territories/:name', (request, response) => {
+  //here is our last endpoint that we are acessing
   database('dependencies_or_territories').where('name', request.params.name).del()
     .then(territory => {
       if(territory) {
