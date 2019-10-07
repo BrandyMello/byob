@@ -1,7 +1,5 @@
 const express = require('express');
-//requiring express
 const app = express();
-//assigning the app to the invocation of express
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
@@ -29,7 +27,6 @@ app.get('/api/v1/countries', (request, response) => {
 });
 
 app.get('/api/v1/countries/:id', (request, response) => {
-  console.log(request.params.id)
   database('countries').where('id', parseInt(request.params.id)).select()
     .then((countries) => {
       if (countries.length) {
@@ -134,13 +131,13 @@ app.delete('/api/v1/countries/:id', (request, response) => {
     .catch(error => response.status(500).json({error}))
 });
 
-app.delete('/api/v1/territories/:name', (request, response) => {
-  database('dependencies_or_territories').where('name', request.params.name).del()
+app.delete('/api/v1/territories/:id', (request, response) => {
+  database('dependencies_or_territories').where('id', request.params.id).del()
     .then(territory => {
       if(territory) {
-        response.status(201).send(`Territory ${request.params.name} has been deleted.`)
+        response.status(201).send(`Territory ${request.params.id} has been deleted.`)
       } else {
-        response.status(404).send(`Territory ${request.params.name} not found.`)
+        response.status(404).send(`Territory ${request.params.id} not found.`)
       }
     })
     .catch(error => response.status(500).json({ error }))
