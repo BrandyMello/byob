@@ -1,5 +1,7 @@
 ## BYOB - Build Your Own Backend
-Overview: This project was built in order to practice building a restful API, viewing it in Postgres, and accessing data on a local server and from the API deployed to Heroku.
+Overview: This project was built in order to practice building a restful API, viewing it in Postgres, and accessing data on a local server and from the API deployed to Heroku. <br>
+
+Sprint Board: https://github.com/BrandyMello/byob/projects/1
 
 ### Table of Contents
 1. [Schema](#schema)
