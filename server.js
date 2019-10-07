@@ -132,9 +132,9 @@ app.delete('/api/v1/countries/:id', (request, response) => {
 });
 
 app.delete('/api/v1/territories/:id', (request, response) => {
-  database('dependencies_or_territories').where('id', request.params.id).del()
+  database('dependencies_or_territories').where('id', parseInt(request.params.id)).del()
     .then(territory => {
-      if(territory) {
+      if(territory.length) {
         response.status(201).send(`Territory ${request.params.id} has been deleted.`)
       } else {
         response.status(404).send(`Territory ${request.params.id} not found.`)
