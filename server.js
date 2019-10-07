@@ -194,15 +194,19 @@ app.delete('/api/v1/countries/:id', (request, response) => {
     //here we are catching any server errors and returning a 500 and an error object; I am getting this response eventhough the country is actually being deleted.
 });
 
-app.delete('/api/v1/territories/:name', (request, response) => {
-  //here is our last endpoint that we are acessing
-  database('dependencies_or_territories').where('name', request.params.name).del()
+app.delete('/api/v1/territories/:id', (request, response) => {
+  //here is our last endpoint that we are acessing from the territories information with  dynamic id at the end
+  database('dependencies_or_territories').where('id', parseInt(request.params.id)).del()//we are sifting through the database to find the dependencies_or_territories table and where the id matches in that table to the id being passed through(we parseInt to make sure it is a number) and then we are deleting that object, but I am getting the 404 error below
     .then(territory => {
+      //if there is a territory found and I tried territory.length also
       if(territory) {
-        response.status(201).send(`Territory ${request.params.name} has been deleted.`)
+        response.status(201).send(`Territory ${request.params.id} has been deleted.`)
+        //and the a good response will return a 201 status code stating all is good and the data has been altered
       } else {
-        response.status(404).send(`Territory ${request.params.name} not found.`)
+        response.status(404).send(`Territory ${request.params.id} not found.`)
+        //this is the error being returned eventhough the the id is accurate
       }
     })
     .catch(error => response.status(500).json({ error }))
+    //this error catches and returns a 500 status code, throwing an error object if the server response is bad
 });
