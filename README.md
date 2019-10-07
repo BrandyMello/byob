@@ -172,13 +172,13 @@ To DELETE a country: <br>
 ```
 DELETE /api/v1/countries/:id
 ```
+example: ```DELETE /api/v1/countries/2349```
+
 Returns: <br>
 ```
-{
-    "error": {}
-}
+Country with the ID 2349 has been deleted.
 ```
-* When attempt to GET again, it has been deleted.
+
 
 
 
